@@ -58,7 +58,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_left",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -69,7 +69,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_right",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -80,7 +80,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_up",
-"speed": 5.0
+"speed": 3.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dq534"]
@@ -91,7 +91,7 @@ script = ExtResource("1_lrnij")
 
 [node name="PlayerAnimationSprites" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_jv1dy")
-animation = &"walk_down"
+animation = &"walk_up"
 script = ExtResource("2_qquqk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
