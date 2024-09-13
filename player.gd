@@ -18,8 +18,14 @@ func move(direction: Vector2, delta: float):
 	if MOVEMENT_COST > 0:
 		MOVEMENT_COST -= delta
 	var motion = direction*MOVE_DISTANCE
-	var collision = test_move(transform, motion)
-	if MOVEMENT_COST <= 0 and not collision:
-		MOVEMENT_COST = 1
-		position += motion
-	
+	var collision_data = KinematicCollision2D.new()
+	var collision = test_move(transform, motion, collision_data)
+	if MOVEMENT_COST <= 0:
+		if not collision:
+			MOVEMENT_COST = 1
+			position += motion
+		else:
+			var collider = collision_data.get_collider()
+			if collider.has_method("move"):
+				var coordinates = (position/MOVE_DISTANCE)+direction
+				collider.call("move", coordinates)
