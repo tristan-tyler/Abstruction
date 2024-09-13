@@ -22,10 +22,11 @@ func move(direction: Vector2, delta: float):
 	var collision = test_move(transform, motion, collision_data)
 	if MOVEMENT_COST <= 0:
 		if not collision:
-			MOVEMENT_COST = 1
 			position += motion
 		else:
 			var collider = collision_data.get_collider()
-			if collider.has_method("move"):
+			if collider.has_method("collide"):
 				var coordinates = (position/MOVE_DISTANCE)+direction
-				collider.call("move", coordinates)
+				collider.call("collide", coordinates)
+				
+		MOVEMENT_COST = 1

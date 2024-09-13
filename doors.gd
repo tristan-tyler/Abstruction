@@ -1,7 +1,7 @@
 extends TileMapLayer
 
 
-func move(tile_coords: Vector2) -> void:
+func collide(tile_coords: Vector2) -> void:
 	var translation_map = {
 		Vector3(1,2,1):Vector3(1,1,1),
 		Vector3(1,1,1):Vector3(1,2,1),
