@@ -17,16 +17,17 @@ func _process(delta: float) -> void:
 func move(direction: Vector2, delta: float):
 	if MOVEMENT_COST > 0:
 		MOVEMENT_COST -= delta
+		return
 	var motion = direction*MOVE_DISTANCE
 	var collision_data = KinematicCollision2D.new()
 	var collision = test_move(transform, motion, collision_data)
-	if MOVEMENT_COST <= 0:
-		if not collision:
-			position += motion
-		else:
-			var collider = collision_data.get_collider()
-			if collider.has_method("collide"):
-				var coordinates = (position/MOVE_DISTANCE)+direction
-				collider.call("collide", coordinates)
-				
-		MOVEMENT_COST = 1
+
+	if not collision:
+		position += motion
+	else:
+		var collider = collision_data.get_collider()
+		if collider.has_method("collide"):
+			MOVEMENT_COST += collider.call("collide", position, direction)
+			
+	MOVEMENT_COST += 1
+	print(MOVEMENT_COST)
