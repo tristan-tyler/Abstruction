@@ -27,7 +27,7 @@ func move(direction: Vector2, delta: float):
 	else:
 		var collider = collision_data.get_collider()
 		if collider.has_method("collide"):
-			MOVEMENT_COST += collider.call("collide", position, direction)
+			MOVEMENT_COST += collider.call("collide", position, direction).x
 			
 	MOVEMENT_COST += 1
 	print(MOVEMENT_COST)

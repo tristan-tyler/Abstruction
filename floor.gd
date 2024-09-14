@@ -1,6 +1,6 @@
 extends TileMapLayer
 
 
-func collide(actor_position: Vector2, direction: Vector2) -> int:
+func collide(actor_position: Vector2, direction: Vector2) -> Vector2:
 	$AudioStreamPlayer.play()
-	return 1
+	return Vector2(1,0)
