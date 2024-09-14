@@ -16,12 +16,12 @@ func collide(actor_position: Vector2, direction: Vector2) -> Vector2:
 	var effort = 0
 	var cell_coords = Vector2i(local_to_map(actor_position))+Vector2i(direction)
 	var cell_data = get_cell_tile_data(cell_coords)
-	var cell_source_id = get_cell_source_id(cell_coords)
+	var cell_source_id = get_cell_source_id(cell_coords)	
 	var cell_atlas_coords = get_cell_atlas_coords(cell_coords)
 	var cell_alternative_tile = get_cell_alternative_tile(cell_coords)
 	
 	if not cell_data: return Vector2(effort, 1)
-
+	
 	if cell_data.get_custom_data("can_open"):
 		if cell_data.get_custom_data("is_open"):
 			cell_alternative_tile = 0
