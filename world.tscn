@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://b84dksjh3bd8f"]
+[gd_scene load_steps=15 format=4 uid="uid://b84dksjh3bd8f"]
 
 [ext_resource type="Texture2D" uid="uid://5qktf6jbwv2" path="res://Lil Dragon TS/autoTile_roads.png" id="1_lixoj"]
 [ext_resource type="Texture2D" uid="uid://b7u1mvo8nqtug" path="res://Custom Assets/door spritemap.png" id="1_wfwqf"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://floor.gd" id="4_nbagf"]
 [ext_resource type="Texture2D" uid="uid://c8ow8o046pbqp" path="res://Lil Dragon TS/ts_constructions.png" id="5_0d2nf"]
 [ext_resource type="AudioStream" uid="uid://coq0oxqed538n" path="res://Custom Assets/bump.wav" id="5_n1yvq"]
+[ext_resource type="Script" path="res://fog.gd" id="7_fc1xv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2cno5"]
 
@@ -1532,9 +1533,12 @@ script = ExtResource("4_nbagf")
 stream = ExtResource("5_n1yvq")
 
 [node name="Doors" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAACAAIAAAABAAAAAAACAAMAAAABAAIAAAADAAMAAQAEABMAAAAFAAIAAAABAAAAAAAFAAMAAAABAAIAAAAEAAMAAQAEABMAAAA=")
+tile_map_data = PackedByteArray("AAACAAMAAAABAAIAAAADAAMAAQAEABMAAAAFAAIAAAABAAAAAAAFAAMAAAABAAIAAAAEAAMAAQAEABMAAAACAAIAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_v1e6o")
 script = ExtResource("3_r0ke3")
+
+[node name="Fog" type="TileMapLayer" parent="."]
+script = ExtResource("7_fc1xv")
 
 [node name="Player" parent="." instance=ExtResource("2_5xy74")]
 position = Vector2(8, 8)
