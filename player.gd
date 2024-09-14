@@ -1,23 +1,22 @@
 extends CharacterBody2D
 
 const MOVE_DISTANCE = Vector2(16,16)
+var global
 
-var MOVEMENT_COST = 0
+func _ready() -> void:
+	global = get_node("/root/Global")
 
-func _process(delta: float) -> void:
-	if Input.is_action_pressed("ui_left"):
-		move(Vector2.LEFT, delta)
-	if Input.is_action_pressed("ui_right"):
-		move(Vector2.RIGHT, delta)
-	if Input.is_action_pressed("ui_up"):
-		move(Vector2.UP, delta)
-	if Input.is_action_pressed("ui_down"):
-		move(Vector2.DOWN, delta)
+func _input(event) -> void:
+	if event.is_action_pressed("ui_left"):
+		move(Vector2.LEFT)
+	if event.is_action_pressed("ui_right"):
+		move(Vector2.RIGHT)
+	if event.is_action_pressed("ui_up"):
+		move(Vector2.UP)
+	if event.is_action_pressed("ui_down"):
+		move(Vector2.DOWN)
 	
-func move(direction: Vector2, delta: float):
-	if MOVEMENT_COST > 0:
-		MOVEMENT_COST -= delta
-		return
+func move(direction: Vector2):
 	var motion = direction*MOVE_DISTANCE
 	var collision_data = KinematicCollision2D.new()
 	var collision = test_move(transform, motion, collision_data)
@@ -27,7 +26,7 @@ func move(direction: Vector2, delta: float):
 	else:
 		var collider = collision_data.get_collider()
 		if collider.has_method("collide"):
-			MOVEMENT_COST += collider.call("collide", position, direction).x
+			var move_cost = collider.call("collide", position, direction).x
+			global.change_time_left(-move_cost)
 			
-	MOVEMENT_COST += 1
-	print(MOVEMENT_COST)
+	global.change_time_left(-1)
