@@ -15,7 +15,7 @@ func init_astar():
 	astar_grid.region = tile_rect
 	astar_grid.cell_size = tile_size
 	astar_grid.set_default_compute_heuristic(AStarGrid2D.HEURISTIC_MANHATTAN)
-	astar_grid.set_default_estimate_heuristic(AStarGrid2D.HEURISTIC_MANHATTAN)
+	astar_grid.set_default_estimate_heuristic(AStarGrid2D.HEURISTIC_OCTILE)
 	astar_grid.set_diagonal_mode(AStarGrid2D.DIAGONAL_MODE_NEVER)
 	astar_grid.set_offset(Vector2i.ONE*tile_size/2)
 	astar_grid.update()

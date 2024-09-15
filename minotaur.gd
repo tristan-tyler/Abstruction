@@ -14,8 +14,18 @@ func _ready() -> void:
 	$CollisionShape2D.one_way_collision = true
 
 func _on_timer_timout() -> void:
-	#if move_cost > 0: move_cost -= 1
-	global.change_time_left(-1)
+	if move_cost > 0: move_cost -= 1
+	if global.minotaur_time:
+		global.change_time_left(-1)
+
+func two_by_two(top_left_position):
+	var poslist = [
+		top_left_position,
+		top_left_position+Vector2.RIGHT*16,
+		top_left_position+Vector2.DOWN*16+Vector2.RIGHT*16,
+		top_left_position+Vector2.DOWN*16
+	]
+	return poslist
 
 func _process(_delta: float) -> void:
 	if global.time_left > 0:
@@ -33,32 +43,27 @@ func _process(_delta: float) -> void:
 	print(current_point_path)
 	if not current_point_path: return
 	var base_position = current_point_path[0]
-	
-	var two_by_two = [
-		base_position,
-		base_position+Vector2.RIGHT*8,
-		base_position+Vector2.DOWN*8+Vector2.RIGHT*8,
-		base_position+Vector2.DOWN*8
-	]
-	
 	if not navigation.walkable(base_position): return
-	
-	for target_position in two_by_two:
-		var motion = (-(position-base_position)/16)*MOVE_DISTANCE
+
+	for target_position in two_by_two(base_position):
+		if not navigation.walkable(target_position): navigation.set_cell_solid(target_position)
+		var motion = position.direction_to(base_position)*MOVE_DISTANCE
 		var collision_data = KinematicCollision2D.new()
 		var collision = test_move(transform, motion, collision_data)
 		
 		if not collision:
-			position = base_position
+			transform = transform.translated(motion)
 			move_cost += 1
-			$MinostompMuted.play()
+			if not $MinostompMuted.playing:
+				$MinostompMuted.play()
 			break
 		else:
 			var collider = collision_data.get_collider()
 			if collider.has_method("destroy"):
 				var destory_cost = collider.call("destroy", target_position)
 				if destory_cost == -1:
-					navigation.set_cell_solid(target_position)
-					$MinotaurHuff.play()
+					navigation.set_cell_solid(base_position)
+					if not $MinotaurHuff.playing:
+						$MinotaurHuff.play()
 				else:
 					move_cost += destory_cost

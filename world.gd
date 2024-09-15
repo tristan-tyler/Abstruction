@@ -3,12 +3,13 @@ extends Node2D
 var global
 var music_change_flag: bool
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	global = get_node("/root/Global")
+	global.time_left = 100
+	global.minotaur_time = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not music_change_flag and not $BrackeysSong1.playing:
 		$BrackeysSong1.play()
 	if not music_change_flag and global.time_left <= 0:
