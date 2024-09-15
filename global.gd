@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 var time_left;
 
@@ -8,4 +8,6 @@ func _ready() -> void:
 	
 func change_time_left(delta) -> void:
 	time_left += delta
-	print(time_left)
+
+func restart() -> void:
+	get_tree().reload_current_scene()

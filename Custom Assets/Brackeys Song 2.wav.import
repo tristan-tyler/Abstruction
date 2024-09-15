@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cswhg2pmcymha"
+path="res://.godot/imported/Brackeys Song 2.wav-00fc41301feadd2c6b066e7bd4fb3a39.sample"
+
+[deps]
+
+source_file="res://Custom Assets/Brackeys Song 2.wav"
+dest_files=["res://.godot/imported/Brackeys Song 2.wav-00fc41301feadd2c6b066e7bd4fb3a39.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dya821jur386x"
+path="res://.godot/imported/minostomp muted.wav-79325a57a0fc3c72223e63e7cbefd5cf.sample"
+
+[deps]
+
+source_file="res://Custom Assets/minostomp muted.wav"
+dest_files=["res://.godot/imported/minostomp muted.wav-79325a57a0fc3c72223e63e7cbefd5cf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

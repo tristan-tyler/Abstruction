@@ -23,6 +23,8 @@ func move(direction: Vector2):
 
 	if not collision:
 		position += motion
+		$Footstep.pitch_scale = randf_range(2,2.4)
+		$Footstep.play()
 	else:
 		var collider = collision_data.get_collider()
 		if collider.has_method("collide"):
@@ -30,3 +32,7 @@ func move(direction: Vector2):
 			global.change_time_left(-move_cost)
 			
 	global.change_time_left(-1)
+
+func destroy(_target_position: Vector2):
+	global.restart()
+	return 0

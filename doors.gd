@@ -12,9 +12,8 @@ func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
 	return TILE_RUNTIME_UPDATE.get(coords)		
 
 func collide(actor_position: Vector2, direction: Vector2) -> Vector2:
-	print(actor_position, direction)
 	var effort = 0
-	var cell_coords = Vector2i(local_to_map(actor_position))+Vector2i(direction)
+	var cell_coords = Vector2i.ONE*local_to_map(actor_position)+Vector2i(direction)
 	var cell_data = get_cell_tile_data(cell_coords)
 	var cell_source_id = get_cell_source_id(cell_coords)	
 	var cell_atlas_coords = get_cell_atlas_coords(cell_coords)
@@ -23,6 +22,7 @@ func collide(actor_position: Vector2, direction: Vector2) -> Vector2:
 	if not cell_data: return Vector2(effort, 1)
 	
 	if cell_data.get_custom_data("can_open"):
+		$DoorOpen.play()
 		if cell_data.get_custom_data("is_open"):
 			cell_alternative_tile = 0
 		else:
@@ -45,3 +45,15 @@ func collide(actor_position: Vector2, direction: Vector2) -> Vector2:
 	set_cell(cell_coords, cell_source_id, cell_atlas_coords, cell_alternative_tile)
 	
 	return Vector2(effort, 0)
+
+func destroy(target_position: Vector2):
+	var cell_coords = Vector2i.ONE*local_to_map(target_position)
+	var cell_data = get_cell_tile_data(cell_coords)
+	var cell_source_id = get_cell_source_id(cell_coords)	
+	var cell_atlas_coords = get_cell_atlas_coords(cell_coords)
+	if not cell_data: return 0
+	var difficulty = cell_data.get_custom_data("destroy_difficulty")
+	if difficulty > 0 or cell_data.get_custom_data("brittle"):
+		set_cell(cell_coords, cell_source_id, cell_atlas_coords*Vector2i.DOWN)
+		$WallBreak.play()
+	return difficulty
