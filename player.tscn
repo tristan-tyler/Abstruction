@@ -133,15 +133,11 @@ animation = &"walk_down"
 script = ExtResource("2_qquqk")
 
 [node name="Timer" type="Timer" parent="AnimationSprites"]
-wait_time = 2.0
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_dq534")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
 
 [node name="Footstep" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_og2b4")

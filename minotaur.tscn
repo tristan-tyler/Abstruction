@@ -108,7 +108,7 @@ script = ExtResource("1_itfvk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, 8)
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.66, 0.66)
 shape = SubResource("RectangleShape2D_vdrt4")
 
 [node name="AnimationSprites" type="AnimatedSprite2D" parent="."]
@@ -126,5 +126,6 @@ stream = ExtResource("5_0ypc0")
 
 [node name="MinotaurHuff" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_e03jb")
+volume_db = -1.625
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timout"]

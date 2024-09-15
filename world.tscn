@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://b84dksjh3bd8f"]
+[gd_scene load_steps=23 format=4 uid="uid://b84dksjh3bd8f"]
 
 [ext_resource type="Texture2D" uid="uid://chr4gd4m2miky" path="res://Custom Assets/autoTile_roads_recolor.png" id="1_g2upe"]
 [ext_resource type="Script" path="res://world.gd" id="1_qkch2"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://compgnbl034fk" path="res://minotaur.tscn" id="9_8kr1i"]
 [ext_resource type="Script" path="res://navigation_manager.gd" id="10_ww50f"]
 [ext_resource type="AudioStream" uid="uid://c1slt5j8gw5ma" path="res://Custom Assets/Brackeys Song 1.wav" id="15_rgidm"]
+[ext_resource type="PackedScene" uid="uid://bjp2ab7g03wec" path="res://control.tscn" id="16_4nrv3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2cno5"]
 
@@ -1669,6 +1670,9 @@ script = ExtResource("7_fc1xv")
 position = Vector2(8, 8)
 safe_margin = 0.11
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+
 [node name="NavigationManager" type="Node2D" parent="."]
 position = Vector2(64, 16)
 script = ExtResource("10_ww50f")
@@ -1676,3 +1680,7 @@ script = ExtResource("10_ww50f")
 [node name="BrackeysSong1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_rgidm")
 volume_db = -12.562
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("16_4nrv3")]

@@ -14,19 +14,23 @@ func _ready() -> void:
 	$CollisionShape2D.one_way_collision = true
 
 func _on_timer_timout() -> void:
-	current_point_path = navigation.get_navigation_path(global_position, player.global_position).slice(1)
-	print(current_point_path)
-	if move_cost > 0: move_cost -= 1
+	#if move_cost > 0: move_cost -= 1
+	global.change_time_left(-1)
 
 func _process(_delta: float) -> void:
 	if global.time_left > 0:
 		return
-	elif global.time_left < 0:
+	if move_cost > 0:
+		return
+	elif global.time_left <= 0:
+		$AnimationSprites.visible = true
+	if global.time_left <= 0:
 		move_cost -= 1
 		global.change_time_left(1)
-		$AnimationSprites.visible = true
 
 	if move_cost > 0: return
+	current_point_path = navigation.get_navigation_path(global_position, player.global_position).slice(1)
+	print(current_point_path)
 	if not current_point_path: return
 	var base_position = current_point_path[0]
 	
@@ -37,9 +41,9 @@ func _process(_delta: float) -> void:
 		base_position+Vector2.DOWN*8
 	]
 	
+	if not navigation.walkable(base_position): return
+	
 	for target_position in two_by_two:
-		if not navigation.walkable(target_position): return
-
 		var motion = (-(position-base_position)/16)*MOVE_DISTANCE
 		var collision_data = KinematicCollision2D.new()
 		var collision = test_move(transform, motion, collision_data)
@@ -47,6 +51,7 @@ func _process(_delta: float) -> void:
 		if not collision:
 			position = base_position
 			move_cost += 1
+			$MinostompMuted.play()
 			break
 		else:
 			var collider = collision_data.get_collider()
@@ -54,5 +59,6 @@ func _process(_delta: float) -> void:
 				var destory_cost = collider.call("destroy", target_position)
 				if destory_cost == -1:
 					navigation.set_cell_solid(target_position)
+					$MinotaurHuff.play()
 				else:
 					move_cost += destory_cost

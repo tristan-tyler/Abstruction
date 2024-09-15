@@ -38,6 +38,10 @@ config/icon="res://icon.svg"
 FmodManager="*res://addons/fmod/FmodManager.gd"
 Global="*res://global.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [editor]
 
 version_control/plugin_name="GitPlugin"
