@@ -15,3 +15,7 @@ data_*/
 mono_crash.*.json
 
 *.TMP
+
+web/
+
+*.exe
